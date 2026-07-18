@@ -1,13 +1,378 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta http-equiv="refresh" content="0; url=weboldal_sablon_minimal.html">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weboldal teszt</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bia — Minimalista weboldal vázlat</title>
+<style>
+  :root {
+    --line: #999;
+    --line-strong: #444;
+    --bg: #fff;
+    --bg-alt: #f3f3f3;
+    --bg-dark: #d9d9d9;
+    --text: #333;
+    --text-light: #777;
+    --placeholder: #ececec;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.5;
+  }
+
+  .box {
+    border: 2px dashed var(--line);
+    background: var(--placeholder);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    padding: 1rem;
+    min-height: 60px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    background: var(--line-strong);
+    color: #fff;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+  }
+
+  section {
+    padding: 60px 20px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  h1, h2, h3 {
+    color: var(--line-strong);
+  }
+
+  /* ---- HEADER ---- */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 2px solid var(--line-strong);
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 10;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .logo-box {
+    width: 110px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav li {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    border-bottom: 1px dashed var(--line);
+    padding-bottom: 2px;
+  }
+
+  .burger {
+    display: none;
+    width: 40px;
+    height: 34px;
+    border: 2px dashed var(--line);
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--text-light);
+  }
+
+  /* ---- HERO (teljes szélesség, egyetlen kép/slideshow terület) ---- */
+  .hero {
+    min-height: 70vh;
+    background: var(--bg-dark);
+    border: 2px dashed var(--line);
+    border-left: none;
+    border-right: none;
+    display: flex;
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .hero-inner {
+    width: 100%;
+    background: rgba(255,255,255,0.9);
+    padding: 30px 20px;
+    text-align: center;
+    border-top: 2px dashed var(--line);
+  }
+
+  .status-badge {
+    display: inline-block;
+    border: 1px dashed var(--line-strong);
+    padding: 4px 14px;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--line-strong);
+    margin-bottom: 14px;
+  }
+
+  .hero-inner h1 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin: 0 0 10px;
+  }
+
+  .hero-inner p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    max-width: 520px;
+    margin: 0 auto 18px;
+  }
+
+  .btn-box {
+    display: inline-block;
+    border: 2px dashed var(--line-strong);
+    padding: 10px 26px;
+    font-size: 0.78rem;
+    color: var(--line-strong);
+    background: #fff;
+  }
+
+  .btn-link {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--line-strong);
+    border-bottom: 1px dashed var(--line-strong);
+    padding-bottom: 2px;
+  }
+
+  /* ---- BEMUTATKOZÁS — csak szöveg, kép nélkül, mint az eredetin ---- */
+  .about {
+    text-align: center;
+  }
+
+  .about p {
+    color: var(--text-light);
+    font-size: 0.92rem;
+    max-width: 640px;
+    margin: 0 auto 20px;
+  }
+
+  /* ---- MIÉRT MI — egyszerű felsorolás, nem kártyák ---- */
+  .why-list {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 30px;
+  }
+
+  .why-list li {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    padding: 8px 0 8px 22px;
+    border-bottom: 1px dashed #ddd;
+    position: relative;
+  }
+
+  .why-list li::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    color: var(--line);
+    font-size: 0.6rem;
+    top: 14px;
+  }
+
+  /* ---- ÁRAK TEASER ---- */
+  .teaser {
+    text-align: center;
+    background: var(--bg-alt);
+  }
+
+  .teaser p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    max-width: 520px;
+    margin: 0 auto 18px;
+  }
+
+  /* ---- GALÉRIA TEASER — kevés kép, nem teljes rács ---- */
+  .gallery-teaser {
+    text-align: center;
+  }
+
+  .gallery-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .gallery-row .box { min-height: 150px; }
+
+  /* ---- FOOTER — egyszerű, egy sor ---- */
+  footer {
+    padding: 30px 20px;
+    text-align: center;
+    background: var(--line-strong);
+    color: #ccc;
+  }
+
+  .footer-line {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+    margin-bottom: 14px;
+  }
+
+  .footer-line span {
+    border-bottom: 1px dashed #888;
+    padding-bottom: 2px;
+  }
+
+  .footer-bottom {
+    font-size: 0.72rem;
+    color: #999;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    .burger { display: flex; }
+    .why-list { grid-template-columns: 1fr; }
+    .gallery-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  .wireframe-note {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    font-size: 0.78rem;
+    padding: 10px;
+  }
+</style>
 </head>
 <body>
-  <h1>Szia, világ!</h1>
-  <p>Ez egy nagyon alap teszt weboldal.</p>
+
+<div class="wireframe-note">
+  WIREFRAME — MINIMALISTA VÁLTOZAT (az 1. referencia oldal felépítése alapján) — nem végleges design
+</div>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="logo-box box">[LOGÓ — "Bia"]</div>
+  <div class="burger">[MENÜ ☰]</div>
+  <nav>
+    <ul>
+      <li>[Főoldal]</li>
+      <li>[Árak]</li>
+      <li>[Galéria]</li>
+      <li>[GYIK]</li>
+      <li>[ÁSZF]</li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" style="border-bottom:none; padding-bottom:0;">
+  <div class="hero-inner">
+    <div class="status-badge">[STÁTUSZ — pl. "Megrendelés NYITVA" / "ZÁRVA — újranyitás: ..."]</div>
+    <h1>[FŐCÍM — rövid, egy mondatos bemutatkozás]</h1>
+    <p>[1 mondatos alcím — mit készít Bia]</p>
+    <div class="btn-box">[CTA — pl. "Kérj árajánlatot"]</div>
+  </div>
+</section>
+
+<!-- ================= BEMUTATKOZÁS (csak szöveg) ================= -->
+<section class="about">
+  <div class="wrap">
+    <div class="section-tag">A műhely</div>
+    <h2>[CÍM — rövid bemutatkozás]</h2>
+    <p>[2-3 mondatos szöveg — kik vagyunk, milyen anyagokkal/technikákkal dolgozunk, mi a fókusz (pl. minőség, kényelem)]</p>
+    <span class="btn-link">[Tudj meg többet →]</span>
+  </div>
+</section>
+
+<!-- ================= MIÉRT MI (egyszerű lista) ================= -->
+<section>
+  <div class="wrap">
+    <div class="section-tag">Miért minket válassz</div>
+    <h2>[CÍM — rövid]</h2>
+    <ul class="why-list">
+      <li>[Előny 1 — pl. "Könnyű, szellőző fejrészek"]</li>
+      <li>[Előny 2 — pl. "Kiváló látótávolság"]</li>
+      <li>[Előny 3 — pl. "Teljes egyedi testreszabás"]</li>
+      <li>[Előny 4 — pl. "Gyors válaszidő"]</li>
+      <li>[Előny 5 — pl. "Rugalmas fizetési lehetőségek"]</li>
+      <li>[Előny 6 — pl. "Folyamatos frissítések a munkáról"]</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= ÁRAK TEASER ================= -->
+<section class="teaser">
+  <div class="wrap">
+    <div class="section-tag">Árak</div>
+    <h2>[CÍM — "Nézd meg az árainkat"]</h2>
+    <p>[Rövid szöveg — pl. hogy az árazás rugalmas / kalkulátorral is tájékozódhat]</p>
+    <div class="btn-box">[Gomb — "Árak megtekintése"]</div>
+  </div>
+</section>
+
+<!-- ================= GALÉRIA TEASER (kevés kép) ================= -->
+<section class="gallery-teaser">
+  <div class="wrap">
+    <div class="section-tag">Galéria</div>
+    <h2>[CÍM — "Korábbi munkák"]</h2>
+    <div class="gallery-row">
+      <div class="box">[KÉP 1]</div>
+      <div class="box">[KÉP 2]</div>
+      <div class="box">[KÉP 3]</div>
+    </div>
+    <span class="btn-link">[Teljes galéria megtekintése →]</span>
+  </div>
+</section>
+
+<!-- ================= FOOTER (egyszerű, egy blokk) ================= -->
+<footer>
+  <div class="footer-line">
+    <span>[E-mail]</span>
+    <span>[Instagram]</span>
+    <span>[Discord]</span>
+    <span>[ÁSZF]</span>
+  </div>
+  <div class="footer-bottom">[© Bia — Minden jog fenntartva]</div>
+</footer>
+
 </body>
 </html>
