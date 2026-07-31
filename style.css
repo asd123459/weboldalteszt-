@@ -699,11 +699,3 @@ footer {
   .calc-layout { grid-template-columns: 1fr; }
   .calc-summary { position: static; }
 }
-
-.wireframe-note {
-  background: #222;
-  color: #fff;
-  text-align: center;
-  font-size: 0.78rem;
-  padding: 10px;
-}
