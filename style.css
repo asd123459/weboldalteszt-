@@ -373,6 +373,92 @@ a.btn-box, a.btn-link {
   margin: 0 0 14px;
 }
 
+.calc-hint {
+  text-transform: none;
+  font-weight: normal;
+  color: var(--text-light);
+  letter-spacing: normal;
+  font-size: 0.72rem;
+}
+
+/* ---- Alapcsomag legördülő (egy választható) ---- */
+.calc-select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  font-size: 0.86rem;
+  color: var(--text);
+  background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6"><path d="M0 0l5 6 5-6z" fill="%23444"/></svg>') no-repeat right 16px center;
+  border: 2px dashed var(--line);
+  padding: 13px 40px 13px 16px;
+  cursor: pointer;
+}
+
+.calc-select:hover,
+.calc-select:focus {
+  border-color: var(--line-strong);
+  outline: none;
+}
+
+/* ---- Extrák legördülő (több választható) ---- */
+.calc-multiselect {
+  position: relative;
+}
+
+.calc-multiselect-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: inherit;
+  font-size: 0.86rem;
+  color: var(--text);
+  background: #fff;
+  border: 2px dashed var(--line);
+  padding: 13px 16px;
+  cursor: pointer;
+}
+
+.calc-multiselect-toggle:hover {
+  border-color: var(--line-strong);
+}
+
+.calc-multiselect.open .calc-multiselect-toggle {
+  border-color: var(--line-strong);
+  border-bottom-style: solid;
+}
+
+.calc-multiselect-arrow {
+  color: var(--text-light);
+  transition: transform 0.15s ease;
+}
+
+.calc-multiselect.open .calc-multiselect-arrow {
+  transform: rotate(180deg);
+}
+
+.calc-multiselect-panel {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 20;
+  background: #fff;
+  border: 2px dashed var(--line-strong);
+  border-top: none;
+  padding: 14px;
+}
+
+.calc-multiselect.open .calc-multiselect-panel {
+  display: block;
+}
+
+.calc-multiselect-panel .calc-option:last-child {
+  margin-bottom: 0;
+}
+
 .calc-option {
   display: flex;
   align-items: center;
